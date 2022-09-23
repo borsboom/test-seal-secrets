@@ -4,7 +4,7 @@
 import glob
 import os
 import sys
-import pandas #@@@ WHAT IS PANDAS?
+import csv #@@@ WHAT IS PANDAS?
 # from github import Github
 
 # g = Github(os.getenv('GITHUB_TOKEN'))
@@ -18,4 +18,4 @@ secrets_map_files = glob.glob(f'kubernetes/*/*{ENVIRONMENT_NAME}/secrets_map*.cs
 
 for secrets_map_file in secrets_map_files:
     print(f'@@@ READING {secrets_map_file}')
-    temp_df = pandas.read_csv(f)
+    csv_reader = csv.reader(secrets_map_file, delimiter=',')
