@@ -14,10 +14,11 @@ import sys
 #     print(repo.name)
 
 ENVIRONMENT_NAME = sys.argv[1]
-GITHUB_SECRETS_FILE_PATH = sys.argv[2]
+GITHUB_SECRETS_JSON = sys.argv[2]
 
 #@@@ READ DIRECTLY FROM GITHUB SOMEHOW?
-github_secrets = json.loads(GITHUB_SECRETS_FILE_PATH)
+print('f@@@ GITHUB_SECRETS_JSON={GITHUB_SECRETS_JSON}')
+github_secrets = json.loads(GITHUB_SECRETS_JSON)
 
 secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv')
 
