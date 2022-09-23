@@ -14,7 +14,7 @@ import csv #@@@ WHAT IS PANDAS?
 ENVIRONMENT_NAME = sys.argv[1];
 GITHUB_SECRETS_FILE_PATH = sys.argv[2];
 
-secrets_map_files = glob.glob(f'kubernetes/*/*{ENVIRONMENT_NAME}/secrets_map*.csv');
+secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv');
 
 for secrets_map_file in secrets_map_files:
     print(f'@@@ READING {secrets_map_file}')
