@@ -31,7 +31,7 @@ for secrets_map_file in secrets_map_files:
         #@@@ INLINE SEAL_SECRET
         #@@@ HANDLE MISSING SECRET
         print(f'@@@ {secrets_map_row}')
-        if secrets_map_row.has_key('sealedsecret_data_key'):
+        if 'sealedsecret_data_key' in secrets_map_row:
             print(f'@@@ --from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}')
         # subprocess.run([
         #     "scripts/seal_secret",
