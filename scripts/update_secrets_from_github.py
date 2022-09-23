@@ -29,4 +29,9 @@ for secrets_map_file in secrets_map_files:
         #@@@ SKIP COMMENTS?
         #@@@ INLINE SEAL_SECRET
         #@@@ HANDLE MISSING SECRET
-        subprocess.run(["scripts/seal_secret", secrets_map_row['sealedsecret_name'], f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'])
+        print(f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}')
+        # subprocess.run([
+        #     "scripts/seal_secret",
+        #     secrets_map_row['sealedsecret_name'],
+        #     f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'
+        # ])
