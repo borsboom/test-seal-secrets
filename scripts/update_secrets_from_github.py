@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #TODO: NEED SHEBANG?
 
+import os
 from github import Github
 
 g = Github(os.getenv('GITHUB_TOKEN'))
