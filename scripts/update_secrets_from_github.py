@@ -1,21 +1,32 @@
 #!/usr/bin/env python3
 #TODO: NEED SHEBANG?
 
+import csv
 import glob
+import json
 import os
+import subprocess
 import sys
-import csv #@@@ WHAT IS PANDAS?
-# from github import Github
 
+# from github import Github
 # g = Github(os.getenv('GITHUB_TOKEN'))
 # for repo in g.get_user().get_repos():
 #     print(repo.name)
 
-ENVIRONMENT_NAME = sys.argv[1];
-GITHUB_SECRETS_FILE_PATH = sys.argv[2];
+ENVIRONMENT_NAME = sys.argv[1]
+GITHUB_SECRETS_FILE_PATH = sys.argv[2]
 
-secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv');
+#@@@ READ DIRECTLY FROM GITHUB SOMEHOW?
+github_secrets = json.loads(GITHUB_SECRETS_FILE_PATH)
+
+secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv')
 
 for secrets_map_file in secrets_map_files:
     print(f'@@@ READING {secrets_map_file}')
-    csv_reader = csv.reader(secrets_map_file, delimiter=',')
+    #@@@ SHOULD WE USE YAML/JSON INSTEAD?
+    secrets_map_csv_reader = csv.DictReader(secrets_map_file])
+    for secrets_map_row in secrets_map_csv_reader:
+        #@@@ SKIP COMMENTS?
+        #@@@ INLINE SEAL_SECRET
+        #@@@ HANDLE MISSING SECRET
+        subprocess.run(["scripts/seal_secret", secrets_map_row['sealedsecret_name'], f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'])
