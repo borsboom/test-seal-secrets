@@ -24,7 +24,7 @@ secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secret
 for secrets_map_file in secrets_map_files:
     print(f'@@@ READING {secrets_map_file}')
     #@@@ SHOULD WE USE YAML/JSON INSTEAD?
-    secrets_map_csv_reader = csv.DictReader(secrets_map_file])
+    secrets_map_csv_reader = csv.DictReader(secrets_map_file)
     for secrets_map_row in secrets_map_csv_reader:
         #@@@ SKIP COMMENTS?
         #@@@ INLINE SEAL_SECRET
