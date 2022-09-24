@@ -20,21 +20,22 @@ GITHUB_SECRETS_JSON = sys.argv[2]
 print('f@@@ GITHUB_SECRETS_JSON={GITHUB_SECRETS_JSON}')
 github_secrets = json.loads(GITHUB_SECRETS_JSON)
 
-secrets_map_files = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv')
+secrets_map_paths = glob.glob(f'kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv')
 
-for secrets_map_file in secrets_map_files:
-    print(f'@@@ READING {secrets_map_file}')
-    #@@@ SHOULD WE USE YAML/JSON INSTEAD?
-    secrets_map_csv_reader = csv.DictReader(secrets_map_file)
-    for secrets_map_row in secrets_map_csv_reader:
-        #@@@ SKIP COMMENTS?
-        #@@@ INLINE SEAL_SECRET
-        #@@@ HANDLE MISSING SECRET
-        print(f'@@@ {secrets_map_row}')
-        if 'sealedsecret_data_key' in secrets_map_row:
-            print(f'@@@ --from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}')
-        # subprocess.run([
-        #     "scripts/seal_secret",
-        #     secrets_map_row['sealedsecret_name'],
-        #     f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'
-        # ])
+for secrets_map_path in secrets_map_paths:
+    with open(secrets_map_path, mode='r') as secrets_map_file:
+        print(f'@@@ READING {secrets_map_file}')
+        #@@@ SHOULD WE USE YAML/JSON INSTEAD?
+        secrets_map_csv_reader = csv.DictReader(secrets_map_file)
+        for secrets_map_row in secrets_map_csv_reader:
+            #@@@ SKIP COMMENTS?
+            #@@@ INLINE SEAL_SECRET
+            #@@@ HANDLE MISSING SECRET
+            print(f'@@@ {secrets_map_row}')
+            if 'sealedsecret_data_key' in secrets_map_row:
+                print(f'@@@ --from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}')
+            # subprocess.run([
+            #     "scripts/seal_secret",
+            #     secrets_map_row['sealedsecret_name'],
+            #     f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'
+            # ])
