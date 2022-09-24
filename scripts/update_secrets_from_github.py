@@ -42,6 +42,7 @@ for secrets_map_path in secrets_map_paths:
             sealedsecret_path = f'{os.path.dirname(secrets_map_path)}/{secrets_map_row["sealedsecret_name"]}_sealedsecret.yaml'
             if not os.path.exists(sealedsecret_path):
                 kubectl_result = subprocess.run(['kubectl', 'create', 'secret', 'generic', secrets_map_row['sealedsecret_name'], '--dry-run=client', '-o', 'yaml'], check=True)
+                print(f'@@@ {kubectl_result.stdout}')
                 kubeseal_result = subprocess.run(['kubeseal', '--namespace', K8S_NAMESPACE, '--scope', 'namespace-wide', '--cert', CERT_PATH, '-o', 'yaml'], input=kubectl_result.stdout, check=True)
                 with open(sealedsecret_path, "w") as sealedsecret_file:
                     sealedsecret_file.write(kubeseal_result.stdout)
