@@ -37,4 +37,4 @@ for secrets_map_path in secrets_map_paths:
                 "scripts/seal_secret",
                 secrets_map_row['sealedsecret_name'],
                 f'--from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}'
-            ])
+            ], check=True)
