@@ -32,10 +32,8 @@ for secrets_map_path in secrets_map_paths:
             #@@@ INLINE SEAL_SECRET
             #@@@ HANDLE MISSING SECRET
             print(f'@@@ {secrets_map_row}')
-            if 'sealedsecret_data_key' in secrets_map_row:
-                print(f'@@@ --from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}')
-            # subprocess.run([
-            #     "scripts/seal_secret",
-            #     secrets_map_row['sealedsecret_name'],
-            #     f'--from-literal={secrets_map_row['sealedsecret_data_key']}={github_secrets[secrets_map_row['github_secret_name']]}'
-            # ])
+            subprocess.run([
+                "scripts/seal_secret",
+                secrets_map_row['sealedsecret_name'],
+                f'--from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}'
+            ])
