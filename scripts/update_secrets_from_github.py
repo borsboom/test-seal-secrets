@@ -44,7 +44,7 @@ for secrets_map_path in secrets_map_paths:
             ], check=True)
             os.chdir(old_cwd)
             #@@@ CONSTANT FOR FILE SUFFIX
-            with open(f'{os.path.dirname(secrets_map_path)}/{secrets_map_row['sealedsecret_name']}_sealedsecret.yaml', 'r') as sealedsecret_file
+            with open(f'{os.path.dirname(secrets_map_path)}/{secrets_map_row['sealedsecret_name']}_sealedsecret.yaml', 'r') as sealedsecret_file:
                 sealedsecret_yaml = yaml.safe_load(sealedsecret_file)
             #@@@ COMPARE SHA TO NEW VALUE
             sealedsecret_yaml['metadata']['annotations']['update-secrets-from-github-sha256'] = "@@@ SETME"
