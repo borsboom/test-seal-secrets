@@ -33,8 +33,12 @@ for secrets_map_path in secrets_map_paths:
             #@@@ INLINE SEAL_SECRET
             #@@@ HANDLE MISSING SECRET
             print(f'@@@ {secrets_map_row}')
+            old_cwd = os.getcwd()
+            #@@@ SUPPORT HELM SEALED SECRETS TOO (IN TEMPLATES SUBDIR)
+            os.chdir(os.path.basename(secrets_map_path))
             subprocess.run([
                 "scripts/seal_secret",
                 secrets_map_row['sealedsecret_name'],
                 f'--from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}'
             ], check=True)
+            os.chdir(old_cwd)
