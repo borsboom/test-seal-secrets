@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 #TODO: NEED SHEBANG?
 
-#@@@ TRIM IMPORTS
+#@@@ TRIM/SORT IMPORTS
 import csv
 import glob
 import json
 import os
 import subprocess
 import sys
+import yaml
 
 # from github import Github
 # g = Github(os.getenv('GITHUB_TOKEN'))
@@ -42,3 +43,11 @@ for secrets_map_path in secrets_map_paths:
                 f'--from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}'
             ], check=True)
             os.chdir(old_cwd)
+            #@@@ CONSTANT FOR FILE SUFFIX
+            with open(f'{os.path.dirname(secrets_map_path)}/{secrets_map_row['sealedsecret_name']}_sealedsecret.yaml', 'r') as sealedsecret_file
+                sealedsecret_yaml = yaml.safe_load(sealedsecret_file)
+            #@@@ COMPARE SHA TO NEW VALUE
+            sealedsecret_yaml['metadata']['annotations']['update-secrets-from-github-sha256'] = "@@@ SETME"
+            #@@@ CONSTANT FOR FILE SUFFIX
+            with open(f'{os.path.dirname(secrets_map_path)}/{secrets_map_row['sealedsecret_name']}_sealedsecret.yaml', 'w') as sealedsecret_file:
+                yaml.dump(sealedsecret_yaml, sealedsecret_file)
