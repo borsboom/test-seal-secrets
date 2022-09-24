@@ -35,7 +35,7 @@ for secrets_map_path in secrets_map_paths:
             print(f'@@@ {secrets_map_row}')
             old_cwd = os.getcwd()
             #@@@ SUPPORT HELM SEALED SECRETS TOO (IN TEMPLATES SUBDIR)
-            os.chdir(os.path.parent(secrets_map_path))
+            os.chdir(os.path.dirname(secrets_map_path))
             subprocess.run([
                 "scripts/seal_secret",
                 secrets_map_row['sealedsecret_name'],
