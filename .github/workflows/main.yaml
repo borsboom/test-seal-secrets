@@ -8,7 +8,6 @@ on:
 
 jobs:
 
-  #@@@ ADD A COMMON WORKFLOW FOR ALL NON-SHARED ENVIRONMENTS
   #@@@ JOB NAME?
   all:
     uses: borsboom/github-sealed-secrets-action/.github/workflows/update_sealed_secrets_all_environments.yaml@main #@@@ SPECIFY TAG
