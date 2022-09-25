@@ -24,7 +24,7 @@ ENVIRONMENT_NAME = os.environ["INPUT_ENVIRONMENT_NAME"] #@@@ sys.argv[2]
 GITHUB_SECRETS_JSON = os.environ["INPUT_GITHUB_SECRETS_JSON"] #@@@ sys.argv[3]
 
 # @@@ CHANGE LOCATION?
-CERTIFICATE_PATH = f"certificates/{ENVIRONMENT_NAME}_sealedsecrets.crt"
+CERTIFICATE_PATH = f"/app/certificates/{ENVIRONMENT_NAME}_sealedsecrets.crt"
 
 # @@@ READ DIRECTLY FROM GITHUB SOMEHOW?
 GITHUB_SECRETS = json.loads(GITHUB_SECRETS_JSON)
