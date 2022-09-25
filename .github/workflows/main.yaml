@@ -16,6 +16,7 @@ jobs:
       kubernetes_namespace: myns
 
   test:
+    needs: dev
     uses: ./.github/workflows/update_sealed_secrets.yaml
     secrets: inherit
     with:
