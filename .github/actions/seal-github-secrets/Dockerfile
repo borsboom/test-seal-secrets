@@ -8,6 +8,12 @@ RUN pip install --target=/app pyyaml
 # https://github.com/GoogleContainerTools/distroless
 #@@@ ADJUST IMAGE?
 FROM gcr.io/distroless/python3-debian10
+#@@@ SKIP WRITING TO TAR FILE, JUST PIPE TO DECOMPRESS
+RUN cd /tmp \
+ && wget -qO kubeseal.tar.gz https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.2/kubeseal-0.18.2-linux-amd64.tar.gz \
+ && tar -xzf kubeseal.tar.gz \
+ && sudo install -m 755 kubeseal /usr/local/bin/kubeseal \
+ && rm -f kubeseal.tar.gz
 COPY --from=builder /app /app
 WORKDIR /app
 ENV PYTHONPATH /app

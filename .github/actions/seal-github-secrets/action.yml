@@ -16,9 +16,10 @@ inputs:
 #@@@   myOutput:
 #@@@     description: "Output from the action"
 runs:
-  #@@@ using: "docker"
-  #@@@ image: "Dockerfile"
-  using: "composite"
-  steps:
-    - run: ./main.py
-      shell: bash
+  using: "docker"
+  image: "Dockerfile"
+  #@@@ TRY COMPOSITE? (SEE https://shipyard.build/blog/your-first-python-github-action/)
+  # using: "composite"
+  # steps:
+  #   - run: ./main.py
+  #     shell: bash
