@@ -18,12 +18,13 @@ import hashlib
 # for repo in g.get_user().get_repos():
 #     print(repo.name)
 
-K8S_NAMESPACE = sys.argv[1]
-ENVIRONMENT_NAME = sys.argv[2]
-GITHUB_SECRETS_JSON = sys.argv[3]
+KUBERNETES_NAMESPACE = os.environ("KUBERNETES_NAMESPACE") #@@@ sys.argv[1]
+ENVIRONMENT_NAME = os.environ("ENVIRONMENT_NAME") #@@@ sys.argv[2]
+#@@@ ANY LIMIT TO SIZE WE CAN PASS VIA ENVIRONMENT VARIABLE?
+GITHUB_SECRETS_JSON = os.environ("GITHUB_SECRETS_JSON") #@@@ sys.argv[3]
 
 # @@@ CHANGE LOCATION?
-CERT_PATH = f"{os.path.dirname(sys.argv[0])}/data/{ENVIRONMENT_NAME}_sealedsecrets.crt"
+CERTIFICATE_PATH = f"certificates/{ENVIRONMENT_NAME}_sealedsecrets.crt"
 
 # @@@ READ DIRECTLY FROM GITHUB SOMEHOW?
 GITHUB_SECRETS = json.loads(GITHUB_SECRETS_JSON)
@@ -46,16 +47,16 @@ def run_kubeseal(sealedsecret_path, sealedsecret_name, kubectl_args, kubeseal_ar
         capture_output=True,
     )
     print(f"@@@ kubectl_result.stdout={kubectl_result.stdout}")
-    # @@@ TAKE K8S_NAMESPACE AND CERT_PATH AS ARGUMENT?
+    # @@@ TAKE KUBERNETES_NAMESPACE AND CERTIFICATE_PATH AS ARGUMENT?
     kubeseal_result = subprocess.run(
         [
             "kubeseal",
             "--namespace",
-            K8S_NAMESPACE,
+            KUBERNETES_NAMESPACE,
             "--scope",
             "namespace-wide",
             "--cert",
-            CERT_PATH,
+            CERTIFICATE_PATH,
             "-o",
             "yaml",
         ]

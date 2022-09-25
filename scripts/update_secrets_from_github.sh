@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#@@@ REMOVE THIS FILE
 set -xeu -o pipefail
 #TODO: MOVE TO SHARED WORKFLOW
 #TODO: REWRITE IN PYTHON?
