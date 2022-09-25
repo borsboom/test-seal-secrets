@@ -10,7 +10,6 @@ jobs:
 
   dev:
     uses: ./.github/workflows/update_sealed_secrets.yaml
-    needs: commit
     secrets: inherit
     with:
       environment_name: dev
