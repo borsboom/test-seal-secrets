@@ -33,7 +33,7 @@ GITHUB_SECRETS = json.loads(GITHUB_SECRETS_JSON)
 def run_kubeseal(sealedsecret_path, sealedsecret_name, kubectl_args, kubeseal_args):
     kubectl_result = subprocess.run(
         [
-            "kubectl",
+            "./kubectl",
             "create",
             "secret",
             "generic",
@@ -50,7 +50,7 @@ def run_kubeseal(sealedsecret_path, sealedsecret_name, kubectl_args, kubeseal_ar
     # @@@ TAKE KUBERNETES_NAMESPACE AND CERTIFICATE_PATH AS ARGUMENT?
     kubeseal_result = subprocess.run(
         [
-            "kubeseal",
+            "./kubeseal",
             "--namespace",
             KUBERNETES_NAMESPACE,
             "--scope",
