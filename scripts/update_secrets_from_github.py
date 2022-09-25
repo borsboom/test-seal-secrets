@@ -57,9 +57,9 @@ for secrets_map_path in secrets_map_paths:
             #     f'--from-literal={secrets_map_row["sealedsecret_data_key"]}={github_secrets[secrets_map_row["github_secret_name"]]}'
             # ], check=True)
             # os.chdir(old_cwd)
-            with open(sealedsecret_file, 'r') as sealedsecret_file:
+            with open(sealedsecret_path, 'r') as sealedsecret_file:
                 sealedsecret_yaml = yaml.safe_load(sealedsecret_file)
             #@@@ COMPARE SHA TO NEW VALUE
             sealedsecret_yaml['metadata']['annotations']['update-secrets-from-github-sha256'] = "@@@ SETME"
-            with open(sealedsecret_file, 'w') as sealedsecret_file:
+            with open(sealedsecret_path, 'w') as sealedsecret_file:
                 yaml.dump(sealedsecret_yaml, sealedsecret_file)
