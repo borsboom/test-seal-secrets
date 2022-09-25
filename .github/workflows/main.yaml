@@ -1,0 +1,28 @@
+name: Main #@@@
+
+on:
+  push:
+    #TODO: REMOVE ON PUSH
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  dev:
+    uses: ./.github/workflows/update_sealed_secrets.yaml
+    needs: commit
+    secrets: inherit
+    with:
+      environment_name: dev
+      kubernetes_namespace: myns
+
+  # test:
+  #   needs: [dev]
+  #   runs-on: ubuntu-latest
+  #   environment: test
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Update secrets
+  #     #TODO: IMPLEMENT
+  #       run: |
+  #         echo '${{ toJSON(secrets) }}'

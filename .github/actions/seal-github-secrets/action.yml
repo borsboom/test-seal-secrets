@@ -5,7 +5,7 @@ inputs:
   kubernetes_namespace:
     description: "@@@"
     required: true
-  environment_name:
+  environment:
     description: "Input to use @@@"
     required: true
     #@@@ default: "world"

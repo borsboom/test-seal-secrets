@@ -19,12 +19,12 @@ import hashlib
 #     print(repo.name)
 
 KUBERNETES_NAMESPACE = os.environ["INPUT_KUBERNETES_NAMESPACE"] #@@@ sys.argv[1]
-ENVIRONMENT_NAME = os.environ["INPUT_ENVIRONMENT_NAME"] #@@@ sys.argv[2]
+ENVIRONMENT = os.environ["INPUT_ENVIRONMENT"] #@@@ sys.argv[2]
 #@@@ ANY LIMIT TO SIZE WE CAN PASS VIA ENVIRONMENT VARIABLE?
 GITHUB_SECRETS_JSON = os.environ["INPUT_GITHUB_SECRETS_JSON"] #@@@ sys.argv[3]
 
 # @@@ CHANGE LOCATION?
-CERTIFICATE_PATH = f"/app/certificates/{ENVIRONMENT_NAME}_sealedsecrets.crt"
+CERTIFICATE_PATH = f"/app/certificates/{ENVIRONMENT}_sealedsecrets.crt"
 
 # @@@ READ DIRECTLY FROM GITHUB SOMEHOW?
 GITHUB_SECRETS = json.loads(GITHUB_SECRETS_JSON)
@@ -170,7 +170,7 @@ def process_secrets_map_row(
 
 def main():
     secrets_map_paths = glob.glob(
-        f"kubernetes/*/overlays/*{ENVIRONMENT_NAME}/secrets_map*.csv"
+        f"kubernetes/*/overlays/*{ENVIRONMENT}/secrets_map*.csv"
     )
     for secrets_map_path in secrets_map_paths:
         with open(secrets_map_path, mode="r") as secrets_map_file:
