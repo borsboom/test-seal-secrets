@@ -15,13 +15,9 @@ jobs:
       environment: dev
       kubernetes_namespace: myns
 
-  # test:
-  #   needs: [dev]
-  #   runs-on: ubuntu-latest
-  #   environment: test
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Update secrets
-  #     #TODO: IMPLEMENT
-  #       run: |
-  #         echo '${{ toJSON(secrets) }}'
+  test:
+    uses: ./.github/workflows/update_sealed_secrets.yaml
+    secrets: inherit
+    with:
+      environment: test
+      kubernetes_namespace: myns
