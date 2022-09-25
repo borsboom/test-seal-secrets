@@ -44,8 +44,9 @@ for secrets_map_path in secrets_map_paths:
                 kubectl_result = subprocess.run(['kubectl', 'create', 'secret', 'generic', secrets_map_row['sealedsecret_name'], '--dry-run=client', '-o', 'yaml'], check=True, capture_output=True)
                 print(f'@@@ kubectl_result.stdout={kubectl_result.stdout}')
                 kubeseal_result = subprocess.run(['kubeseal', '--namespace', K8S_NAMESPACE, '--scope', 'namespace-wide', '--cert', CERT_PATH, '-o', 'yaml', '--allow-empty-data'], check=False, capture_output=True, input=kubectl_result.stdout)
+                print(f'@@@ kubeseal_result.stdout={kubeseal_result.stdout}')
                 print(f'@@@ kubeseal_result.stderr={kubeseal_result.stderr}')
-                with open(sealedsecret_path, "w") as sealedsecret_file:
+                with open(sealedsecret_path, "wb") as sealedsecret_file:
                     sealedsecret_file.write(kubeseal_result.stdout)
             # old_cwd = os.getcwd()
             # #@@@ SUPPORT HELM SEALED SECRETS TOO (IN TEMPLATES SUBDIR)
