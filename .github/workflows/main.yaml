@@ -8,8 +8,9 @@ on:
 
 jobs:
 
+  #@@@ ADD A COMMON WORKFLOW FOR ALL NON-SHARED ENVIRONMENTS
   dev:
-    uses: ./.github/workflows/update_sealed_secrets.yaml
+    uses: borsboom/github-sealed-secrets-action@main #@@@ SPECIFY TAG
     secrets: inherit
     with:
       environment: dev
@@ -17,7 +18,7 @@ jobs:
 
   test:
     needs: dev
-    uses: ./.github/workflows/update_sealed_secrets.yaml
+    uses: borsboom/github-sealed-secrets-action@main #@@@ SPECIFY TAG
     secrets: inherit
     with:
       environment: test
