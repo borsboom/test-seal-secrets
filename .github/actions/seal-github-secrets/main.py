@@ -18,10 +18,10 @@ import hashlib
 # for repo in g.get_user().get_repos():
 #     print(repo.name)
 
-KUBERNETES_NAMESPACE = os.environ["KUBERNETES_NAMESPACE"] #@@@ sys.argv[1]
-ENVIRONMENT_NAME = os.environ["ENVIRONMENT_NAME"] #@@@ sys.argv[2]
+KUBERNETES_NAMESPACE = os.environ["INPUT_KUBERNETES_NAMESPACE"] #@@@ sys.argv[1]
+ENVIRONMENT_NAME = os.environ["INPUT_ENVIRONMENT_NAME"] #@@@ sys.argv[2]
 #@@@ ANY LIMIT TO SIZE WE CAN PASS VIA ENVIRONMENT VARIABLE?
-GITHUB_SECRETS_JSON = os.environ["GITHUB_SECRETS_JSON"] #@@@ sys.argv[3]
+GITHUB_SECRETS_JSON = os.environ["INPUT_GITHUB_SECRETS_JSON"] #@@@ sys.argv[3]
 
 # @@@ CHANGE LOCATION?
 CERTIFICATE_PATH = f"certificates/{ENVIRONMENT_NAME}_sealedsecrets.crt"
