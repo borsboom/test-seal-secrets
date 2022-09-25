@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/update_sealed_secrets.yaml
     secrets: inherit
     with:
-      environment_name: dev
+      environment: dev
       kubernetes_namespace: myns
 
   # test:
