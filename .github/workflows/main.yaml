@@ -9,17 +9,9 @@ on:
 jobs:
 
   #@@@ ADD A COMMON WORKFLOW FOR ALL NON-SHARED ENVIRONMENTS
-  dev:
-    uses: borsboom/github-sealed-secrets-action/.github/workflows/update_sealed_secrets.yaml@main #@@@ SPECIFY TAG
+  #@@@ JOB NAME?
+  all:
+    uses: borsboom/github-sealed-secrets-action/.github/workflows/update_sealed_secrets_all_environments.yaml@main #@@@ SPECIFY TAG
     secrets: inherit
     with:
-      environment: dev
-      kubernetes_namespace: myns
-
-  test:
-    needs: dev
-    uses: borsboom/github-sealed-secrets-action/.github/workflows/update_sealed_secrets.yaml@main #@@@ SPECIFY TAG
-    secrets: inherit
-    with:
-      environment: test
       kubernetes_namespace: myns
