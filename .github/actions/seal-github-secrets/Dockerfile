@@ -1,6 +1,9 @@
 FROM python:3.9-slim AS builder
 ADD . /app
 WORKDIR /app
+RUN apt update \
+ && apt install -y curl \
+ && rm -rf /var/lib/apt/lists/*
 RUN curl -sSLf https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.2/kubeseal-0.18.2-linux-amd64.tar.gz | tar xzf - \
  && chmod a+x kubeseal
 RUN pip install --target=/app pyyaml
