@@ -5,13 +5,16 @@ on:
     inputs:
       argocd_app:
         description: Application name #@@@
+        type: string
         required: true
         default: app1
       image_tag:
         description: Docker image tag #@@@
+        type: string
         required: true
       commit_ref:
         description: Base Kustomization commit reference #@@@
+        type: string
         required: true
 jobs:
   update:
