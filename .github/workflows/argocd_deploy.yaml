@@ -8,6 +8,11 @@ on:
         type: string
         required: true
         default: app1
+      argocd_overlays:
+        description: Overlay names #@@@
+        type: string
+        required: true
+        default: dev azure-dev
       image_tag:
         description: Docker image tag #@@@
         type: string
@@ -24,5 +29,6 @@ jobs:
     with:
       #@@@ NEED github.event.?
       argocd_app: ${{ github.event.inputs.argocd_app }}
+      argocd_overlays: ${{ github.event.inputs.argocd_overlays }}
       image_tag: ${{ github.event.inputs.image_tag }}
       commit_ref: ${{ github.event.inputs.commit_ref }}
