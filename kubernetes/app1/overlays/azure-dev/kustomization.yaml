@@ -3,8 +3,8 @@ commonLabels:
   app: app1
   variant: azure-dev
 bases:
-  - ssh://git@github.com:BBY-Health/app1.git/kubernetes/base?ref=aa
+  - ssh://git@github.com:BBY-Health/app1.git/kubernetes/base?ref=bb
 images:
   - name: app1
     newName: 883851127566.dkr.ecr.us-west-2.amazonaws.com/app1
-    newTag: a
+    newTag: b
