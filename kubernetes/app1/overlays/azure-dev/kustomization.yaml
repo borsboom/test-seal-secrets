@@ -1,0 +1,10 @@
+namespace: default
+commonLabels:
+  app: app1
+  variant: azure-dev
+bases:
+  - ssh://git@github.com:BBY-Health/app1.git/kubernetes/base?ref=main
+images:
+  - name: app1
+    newName: 883851127566.dkr.ecr.us-west-2.amazonaws.com/app1
+    newTag: 1.0.0.44
