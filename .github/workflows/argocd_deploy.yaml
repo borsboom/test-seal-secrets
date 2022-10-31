@@ -1,0 +1,25 @@
+name: ArgoCD Deploy #@@@
+
+on:
+  workflow_dispatch:
+    inputs:
+      argocd_app:
+        description: Application name #@@@
+        required: true
+        default: app1
+      image_tag:
+        description: Docker image tag #@@@
+        required: true
+      commit_ref:
+        description: Base Kustomization commit reference #@@@
+        required: true
+jobs:
+  update:
+    name: Deploy
+    uses: borsboom/seal-github-secrets-action/.github/workflows/argocd_deploy.yaml@main #TODO: SPECIFY TAG
+    secrets: inherit
+    with:
+      #@@@ NEED github.event.?
+      argocd_app: ${{ github.event.inputs.argocd_app }}
+      image_tag: ${{ github.event.inputs.image_tag }}
+      commit_ref: ${{ github.event.inputs.commit_ref }}
