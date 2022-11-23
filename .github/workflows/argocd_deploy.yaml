@@ -3,26 +3,26 @@ name: ArgoCD Deploy #@@@
 on:
   workflow_dispatch:
     inputs:
-      argocd_app:
+      ARGOCD_APP:
         description: Application name #@@@
         type: string
         required: true
         default: app1
-      argocd_update_overlays:
+      ARGOCD_UPDATE_OVERLAYS:
         description: Update overlay names (space separated) #@@@
         type: string
         required: true
         default: dev azure-dev
-      argocd_promote_overlays:
+      ARGOCD_PROMOTE_OVERLAYS:
         description: Promote overlay names (space separated) #@@@
         type: string
         required: true
         default: test aws-test
-      image_tag:
+      IMAGE_TAG:
         description: Docker image tag #@@@
         type: string
         required: true
-      commit_ref:
+      BASE_COMMIT_REF:
         description: Base Kustomization commit reference #@@@
         type: string
         required: true
@@ -34,8 +34,8 @@ jobs:
     secrets: inherit
     with:
       #@@@ NEED github.event.?
-      argocd_app: ${{ github.event.inputs.argocd_app }}
-      argocd_update_overlays: ${{ github.event.inputs.argocd_update_overlays }}
-      argocd_promote_overlays: ${{ github.event.inputs.argocd_promote_overlays }}
-      image_tag: ${{ github.event.inputs.image_tag }}
-      commit_ref: ${{ github.event.inputs.commit_ref }}
+      ARGOCD_APP: ${{ github.event.inputs.ARGOCD_APP }}
+      ARGOCD_UPDATE_OVERLAYS: ${{ github.event.inputs.ARGOCD_UPDATE_OVERLAYS }}
+      ARGOCD_PROMOTE_OVERLAYS: ${{ github.event.inputs.ARGOCD_PROMOTE_OVERLAYS }}
+      IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+      BASE_COMMIT_REF: ${{ github.event.inputs.BASE_COMMIT_REF }}
