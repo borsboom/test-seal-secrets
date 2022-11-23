@@ -3,8 +3,9 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  webhook:
+  trigger:
+    #@@@ ADJUST LOCATION
     uses: borsboom/seal-github-secrets-action/.github/workflows/argocd-webhook.yaml@main
     with:
-      ARGOCD_WEBHOOK_URL: https://httpbin.org/anything
-      RUNS_ON: self-hosted
+      ARGOCD_WEBHOOK_URL: https://httpbin.org/anything #@@@
+      RUNS_ON: ubuntu-latest #@@@
