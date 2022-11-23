@@ -1,14 +1,10 @@
-name: ArgoCD webhook
+name: Trigger ArgoCD webhook
 on:
   push:
 jobs:
-  build:
+  webhook:
     runs-on: self-hosted
-    steps:
-    - name: Trigger ArgoCD webhook
-      env:
-        WEBHOOK_EVENT: ${{ toJson(github.event) }}
-        #@@@ MAKE ENDPOINT AN INPUT
-      run: |
-        curl --header "X-GitHub-Event: push" --header "Content-Type: application/json" -X POST --data "$WEBHOOK_EVENT" https://httpbin.org/anything
-      #@@@ https://kube-aws-grcp-argocd.shared.bbyhealth.com/api/webhook/
+    uses: borsboom/seal-github-secrets-action/.github/workflows/argocd-webhook.yaml@main
+    with:
+      ARGOCD_WEBHOOK_URL: https://httpbin.org/anything
+      RUNS_ON: self-hosted
