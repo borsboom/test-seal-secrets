@@ -1,6 +1,7 @@
 name: Trigger ArgoCD webhook
 on:
   push:
+  workflow_dispatch:
 jobs:
   webhook:
     runs-on: self-hosted
