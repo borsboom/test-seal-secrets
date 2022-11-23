@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 jobs:
   webhook:
-    runs-on: self-hosted
     uses: borsboom/seal-github-secrets-action/.github/workflows/argocd-webhook.yaml@main
     with:
       ARGOCD_WEBHOOK_URL: https://httpbin.org/anything
